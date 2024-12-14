@@ -66,15 +66,11 @@
         }
 
         .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
             background-color: #f44336;
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            border-radius: 1em;
+            padding: 15px;
             font-size: 16px;
             cursor: pointer;
         }
@@ -82,9 +78,17 @@
         .close-button:hover {
             background-color: #d32f2f;
         }
+        .error-box {
+            text-align: center;
+            margin-top: 20vh;
+        }
     </style>
 </head>
 <body>
-    <h1>Something went wrong...</h1>
+    <div class="error-box">
+        <h1>Something went wrong...</h1>
+        <h2>Given URL not pointing to valid OpenAPI spec</h2>
+        <button class="close-button" onclick="window.location.assign(window.location.origin)">Go back</button>
+    </div>
 </body>
 </html>

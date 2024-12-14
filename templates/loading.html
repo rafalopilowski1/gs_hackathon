@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scanning...</title>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p id="progress" style="text-align: center; margin-top: 200px;">Progress: 0%</p>
+    <script>
+        const scanID = "{{ scanID }}";
+        const ws = new WebSocket(`ws://${window.location.host}/ws`);
+        ws.onopen = () => {
+            ws.send(scanID);
+        };
+        ws.onmessage = (event) => {
+            const message = event.data;
+            if (message.startsWith("redirect:")) {
+                const redirectUrl = message.split("redirect:")[1];
+                window.location.href = redirectUrl;
+            } else {
+                document.getElementById("progress").innerText = `Progress: ${message}%`;
+            }
+        };
+    </script>
+</body>
+</html>

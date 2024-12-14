@@ -1,43 +1,35 @@
-# To use this module first install the following packages:
-# pip install python-owasp-zap-v2.4
-# to run a sap server sh use the following comand:
-# zap.bat -daemon -port <custom_port> -config api.key=ulooo57b6aagv44m4j0mns2mg7
-# or docker
-# docker run -u zap -p 8080:8080 -i owasp/zap2docker-stable zap-webswing.sh
-
 import time
-import requests
-import json
-from zapv2 import ZAPv2
-
-apiKey = 'ug1a3ikituq8i8m0od65hss3kl'
+from fastapi import FastAPI
+from fastapi.templating import Jinja2Templates
 
 
-zap = ZAPv2(apikey=apiKey, proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
+app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
-url = 'https://api.apis.guru/v2/specs/ably.net/control/1.0.14/openapi.json'
-print('Importing OpenAPI definition from {}'.format(url))
-# result = zap.openapi.import_file(file=f)
-result = zap.openapi.import_url(url)
-print('Import result: {}'.format(result))
+def passive_scan(zap):
+    while int(zap.pscan.records_to_scan) > 0:
+        print('Records to passive scan : ' + zap.pscan.records_to_scan)
+        time.sleep(2)
 
-headers = {
-  'Accept': 'application/json'
-}
+def active_scan(zap):
+    scanID = zap.ascan.scan()
+    while int(zap.ascan.status(scanID)) < 100:
+      progress = zap.ascan.status(scanID)
+      print('Scan progress %: ' + progress)
+      time.sleep(5)
+    return scanID
 
-r = requests.get(f'http://127.0.0.1:8080/JSON/httpSessions/view/sites/?apikey={apiKey}', headers = headers)
-
-# TODO : explore the app (Spider, etc) before using the Passive Scan API, Refer the explore section for details
-while int(zap.pscan.records_to_scan) > 0:
-    # Loop until the passive scan has finished
-    print('Records to passive scan : ' + zap.pscan.records_to_scan)
-    time.sleep(2)
-
-print('Passive Scan completed')
-
-# Print Passive scan results/alerts
-print('Hosts: {}'.format(', '.join(zap.core.hosts)))
-# Save the alerts to a JSON file
-with open('alerts.json', 'w') as json_file:
-    json.dump(zap.core.alerts(), json_file, indent=4)
-# TODO
+    # def load_api(self, url, apikey=None):
+    #     self.zap.core.new_session(name="blablabla", overwrite=True)
+    #     r = requests.get(url)
+    #     openapi = r.json()
+    #     urls = list(map(lambda x: x['url'], openapi['servers']))
+    #     errors = self.zap.openapi.import_url(url, apikey=apikey)
+    #     if errors:
+    #         return False, urls
+    #     loaded_urls = self.zap.core.urls()
+    #     for url in loaded_urls:
+    #         found = any(map(lambda u: u.startswith(url), urls))
+    #         if not found:
+    #             self.zap.core.delete_site_node(url)
+    #     return True, urls
