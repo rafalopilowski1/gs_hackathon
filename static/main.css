@@ -6,11 +6,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('frontend_graphics/background.jpg'); /* Ścieżka do grafiki */
-    background-size: cover; /* Dopasowanie grafiki do całego ekranu */
-    background-position: center; /* Wyrównanie do środka */
-    background-repeat: no-repeat; /* Zapobiega powtarzaniu grafiki */
-    background-attachment: fixed; /* Tło nie przesuwa się podczas przewijania */
+    background-image: url('frontend_graphics/background.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
 }
 
 .container {
@@ -22,19 +22,19 @@ body {
 }
 
 .input-field {
-    width: 100%; /* Szerokość pola tekstowego */
+    width: 100%; 
     font-size: 18px;
-    height: 70px; /* Wysokość pola tekstowego */
-    margin: 40px ; /* Odstęp od innych elementów */
-    border: 0px solid; /* Obramowanie */
-    border-radius: 40px; /* Zaokrąglenie rogów */
-    background-color: rgba(255, 255, 255, 0.2); /* Jasnoszare, półprzezroczyste tło */
-    color: #333333; /* Ciemny kolor tekstu */
-    font-size: 16px; /* Wielkość czcionki */
-    backdrop-filter: blur(10px); /* Rozmycie tła */
-    -webkit-backdrop-filter: blur(10px); /* Obsługa dla Safari */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lekki cień dla efektu */
-    outline: none; /* Usuń domyślny niebieski obrys */
+    height: 70px; 
+    margin: 40px ; 
+    border: 0px solid; 
+    border-radius: 40px; 
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #333333; 
+    font-size: 16px; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    outline: none; 
     margin-top: 300px;
     padding-left: 30px;
     font-family: 'Electrolize';
@@ -48,7 +48,7 @@ body {
     
 }
 .submit-button {
-    /* background: linear-gradient(to left, #06218d, rgb(94, 156, 191)); Gradient od prawej do lewej po najechaniu */
+    
     background: linear-gradient(to left, #06218d, rgb(94, 156, 191)); 
     background-size: 150% 150%;  
     border: none;
@@ -71,29 +71,29 @@ body {
 }
 @keyframes flowingGradient{
     0% {
-        background-position: 0% 50%; /* Początek gradientu */
+        background-position: 0% 50%; 
     }
     50% {
-        background-position: 100% 50%; /* Gradient przesuwa się w prawo */
+        background-position: 100% 50%; 
     }
     100% {
-        background-position: 0% 50%; /* Powrót do pozycji początkowej */
+        background-position: 0% 50%; 
     }
 }
 .output-box {
     display: flex;
-    justify-content: space-between; /* Równe odstępy między listami */
+    justify-content: space-between; 
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.2);
     border: 0px solid;
     border-radius: 5px;
     min-height: 150px;
-    gap: 20px; /* Odstęp między listami */
+    gap: 20px; 
 }
 
 .output-section {
-    flex: 1; /* Każda sekcja zajmuje równą przestrzeń */
-    max-width: 45%; /* Ograniczenie szerokości, aby listy nie były za szerokie */
+    flex: 1; 
+    max-width: 45%; 
     padding: 10px;
     border: 1px solid #dddddd;
     border-radius: 5px;
@@ -125,7 +125,7 @@ body {
     margin-top: 0;
     font-size: 16px;
     color: #333333;
-    text-align: center; /* Nagłówki będą na środku każdej listy */
+    text-align: center; 
 }
 
 .output-section ul {
@@ -139,9 +139,9 @@ body {
     border-bottom: 1px solid #cccccc;
 }
 #data-form {
-    display: flex; /* Aktywacja flexbox */
-    flex-direction: column; /* Ustaw elementy w pionie */
-    align-items: center; /* Wyśrodkowanie elementów na środku */
-    gap: 10px; /* Dodanie odstępu między polem tekstowym a przyciskiem */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
 }
 
