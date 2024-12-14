@@ -49,13 +49,11 @@ h1 {
 
 
 .expanded {
-    grid: span 2 / span 2;
     grid-column: span 2; 
     grid-row: span 2; 
     z-index: 10; 
     
 }
-
 
 .alert-title {
     font-size: 26px; 
@@ -70,10 +68,11 @@ h1 {
 }
 
 .alert-details {
+    max-width: 100%;
     background-color: transparent;
     padding: 15px; 
     border-radius: 10px;
-    overflow:auto;
+    overflow-y:auto;
     z-index: 15;
 }
 .hidden {
