@@ -75,6 +75,12 @@ h1 {
     overflow-y:auto;
     z-index: 15;
 }
+.alert-details a {
+    color: black;
+}
+.alert-details li {
+    list-style-type: none;
+}
 .hidden {
     display: none;
 }
