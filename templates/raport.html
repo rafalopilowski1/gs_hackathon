@@ -3,94 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alerts List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        /* Styl dla przycisku rozwijającego */
-        .accordion {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            font-size: 16px;
-        }
-        /* Styl dla zawartości, która jest ukryta na początku */
-        .accordion-content {
-            padding: 10px;
-            display: none;
-            background-color: #f9f9f9;
-            border-top: 1px solid #ddd;
-        }
-        /* Zmiana koloru przycisku po kliknięciu */
-        .active, .accordion:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <title>Alerts Grid</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/raport.css">
+       
 </head>
 <body>
-    <h1>Alerts</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Alert</th>
-                <th>Risk</th>
-                <th>Confidence</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for alert_name, alert_data in alerts.items() %}
-            <tr>
-                <td>{{ alert_name }}</td>
-                <td>{{ alert_data['risk'] }}</td>
-                <td>{{ alert_data['confidence'] }}</td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <!-- Przycisk rozwijający szczegóły -->
-                    <button class="accordion">Show Details</button>
-                    <div class="accordion-content">
-                        <p><strong>Description:</strong> {{ alert_data['description'] }}</p>
-                        <p><strong>Solution:</strong> {{ alert_data['solution'] }}</p>
-                        <p><strong>Reference:</strong> <a href="{{ alert_data['reference'] }}" target="_blank">{{ alert_data['reference'] }}</a></p>
-                        
-                        <h4>URLs:</h4>
-                        <ul>
-                            {% for url in alert_data['urls'] %}
-                                <li><a href="{{ url }}" target="_blank">{{ url }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="grid-container">
+        {% for alert_name, alert_data in alerts.items() %}
+        {% set alertInfoId = '_'.join(alert_name.split()).lower() + '_info' %}
+        {% set alertDetailsId = '_'.join(alert_name.split()).lower() + '_details' %}
+        <div id="{{ alertInfoId }}" class="alert-box">
+            
+            <div class="alert-info" onclick='alertBoxClick("{{ alertInfoId }}","{{ alertDetailsId }}")'>
+                <div class="alert-title">{{ alert_name }}</div>
+                <div class="alert-risk {{ riskClass }}"><strong>Risk:</strong> {{ alert_data['risk'] }}</div>
+                <div class="alert-confidence"><strong>Confidence:</strong> {{ alert_data['confidence'] }}</div>
+            </div>
+            
+            <div id="{{ alertDetailsId }}" class="alert-details hidden">
+                <h4>{{ alert_name }} Details</h4>
+                <div class="alert-risk">
+                <strong>Risk:</strong> {{ alert_data['risk'] }}
+                </div>
+
+
+                <p><strong>Confidence:</strong> {{ alert_data['confidence'] }}</p>
+                <p><strong>Description:</strong> {{ alert_data['description'] }}</p>
+                <p><strong>Solution:</strong> {{ alert_data['solution'] }}</p>
+                <p><strong>Reference:</strong> <a href="{{ alert_data['reference'] }}" target="_blank">{{ alert_data['reference'] }}</a></p>
+                <h4>URLs:</h4>
+                <ul>
+                    {% for url in alert_data['urls'] %}
+                    <li><a href="{{ url }}" target="_blank">{{ url }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
 
     <script>
-        // Funkcja do obsługi kliknięć na przyciskach akordeonu
-        document.querySelectorAll('.accordion').forEach(button => {
-            button.addEventListener('click', function() {
-                // Toggle dla zawartości (pokazuje lub chowa)
-                const content = button.nextElementSibling;
-                content.style.display = content.style.display === 'block' ? 'none' : 'block';
-                // Toggle dla klasy aktywnej (zmiana koloru przycisku)
-                button.classList.toggle('active');
-            });
-        });
+
+        const alertBoxClick = (alertBoxInfoId, alertDetailsId) => {
+            const alertBox = document.getElementById(alertBoxInfoId);
+            const alertDetails = document.getElementById(alertDetailsId);
+
+            if (alertBox.classList.contains('expanded')) {
+                    alertBox.classList.remove('expanded');
+                    alertDetails.classList.remove('shown');
+                    alertDetails.classList.add('hidden');
+            } else {
+
+                document.querySelectorAll('.alert-box').forEach(box => {
+                    box.classList.remove('expanded');
+                });
+                document.querySelectorAll('.alert-details').forEach(details => {
+                    details.classList.remove('shown');
+                    details.classList.add('hidden');
+                })
+                alertBox.classList.add('expanded');
+                alertDetails.classList.add('shown');
+                alertDetails.classList.remove('hidden');
+            }
+        }
     </script>
 </body>
 </html>
