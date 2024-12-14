@@ -1,0 +1,147 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('frontend_graphics/background.jpg'); /* Ścieżka do grafiki */
+    background-size: cover; /* Dopasowanie grafiki do całego ekranu */
+    background-position: center; /* Wyrównanie do środka */
+    background-repeat: no-repeat; /* Zapobiega powtarzaniu grafiki */
+    background-attachment: fixed; /* Tło nie przesuwa się podczas przewijania */
+}
+
+.container {
+    text-align: center;
+    width: 800px;
+    height: 90%;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.input-field {
+    width: 100%; /* Szerokość pola tekstowego */
+    font-size: 18px;
+    height: 70px; /* Wysokość pola tekstowego */
+    margin: 40px ; /* Odstęp od innych elementów */
+    border: 0px solid; /* Obramowanie */
+    border-radius: 40px; /* Zaokrąglenie rogów */
+    background-color: rgba(255, 255, 255, 0.2); /* Jasnoszare, półprzezroczyste tło */
+    color: #333333; /* Ciemny kolor tekstu */
+    font-size: 16px; /* Wielkość czcionki */
+    backdrop-filter: blur(10px); /* Rozmycie tła */
+    -webkit-backdrop-filter: blur(10px); /* Obsługa dla Safari */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lekki cień dla efektu */
+    outline: none; /* Usuń domyślny niebieski obrys */
+    margin-top: 300px;
+    padding-left: 30px;
+    font-family: 'Electrolize';
+}
+
+.input-field::placeholder{
+    color: #333333;
+    opacity: 1;
+
+    font-family: 'Electrolize';
+    
+}
+.submit-button {
+    /* background: linear-gradient(to left, #06218d, rgb(94, 156, 191)); Gradient od prawej do lewej po najechaniu */
+    background: linear-gradient(to left, #06218d, rgb(94, 156, 191)); 
+    background-size: 150% 150%;  
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'arial';
+    color: lightgrey;
+    animation: flowingGradient 5s infinite linear;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover {
+    transform: scale(1.1);
+}
+@keyframes flowingGradient{
+    0% {
+        background-position: 0% 50%; /* Początek gradientu */
+    }
+    50% {
+        background-position: 100% 50%; /* Gradient przesuwa się w prawo */
+    }
+    100% {
+        background-position: 0% 50%; /* Powrót do pozycji początkowej */
+    }
+}
+.output-box {
+    display: flex;
+    justify-content: space-between; /* Równe odstępy między listami */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 0px solid;
+    border-radius: 5px;
+    min-height: 150px;
+    gap: 20px; /* Odstęp między listami */
+}
+
+.output-section {
+    flex: 1; /* Każda sekcja zajmuje równą przestrzeń */
+    max-width: 45%; /* Ograniczenie szerokości, aby listy nie były za szerokie */
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.success {
+    background-color: #eeeeee;
+}
+.error {
+    background-color: rgba(249, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    padding: 10px;
+    border: 0px solid #dddddd;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    color: #ffff;
+    text-align: center;
+    font-weight: bold;
+    height: 30px;
+    border-radius: 40px;
+    
+    
+}
+
+.output-section h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #333333;
+    text-align: center; /* Nagłówki będą na środku każdej listy */
+}
+
+.output-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.output-section li {
+    padding: 5px 0;
+    border-bottom: 1px solid #cccccc;
+}
+#data-form {
+    display: flex; /* Aktywacja flexbox */
+    flex-direction: column; /* Ustaw elementy w pionie */
+    align-items: center; /* Wyśrodkowanie elementów na środku */
+    gap: 10px; /* Dodanie odstępu między polem tekstowym a przyciskiem */
+}
+

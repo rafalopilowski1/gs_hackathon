@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        /* Styl dla przycisku rozwijającego */
+        .accordion {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+        }
+        /* Styl dla zawartości, która jest ukryta na początku */
+        .accordion-content {
+            padding: 10px;
+            display: none;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
+        /* Zmiana koloru przycisku po kliknięciu */
+        .active, .accordion:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alerts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Alert</th>
+                <th>Risk</th>
+                <th>Confidence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alert_name, alert_data in alerts.items() %}
+            <tr>
+                <td>{{ alert_name }}</td>
+                <td>{{ alert_data['risk'] }}</td>
+                <td>{{ alert_data['confidence'] }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <!-- Przycisk rozwijający szczegóły -->
+                    <button class="accordion">Show Details</button>
+                    <div class="accordion-content">
+                        <p><strong>Description:</strong> {{ alert_data['description'] }}</p>
+                        <p><strong>Solution:</strong> {{ alert_data['solution'] }}</p>
+                        <p><strong>Reference:</strong> <a href="{{ alert_data['reference'] }}" target="_blank">{{ alert_data['reference'] }}</a></p>
+                        
+                        <h4>URLs:</h4>
+                        <ul>
+                            {% for url in alert_data['urls'] %}
+                                <li><a href="{{ url }}" target="_blank">{{ url }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Funkcja do obsługi kliknięć na przyciskach akordeonu
+        document.querySelectorAll('.accordion').forEach(button => {
+            button.addEventListener('click', function() {
+                // Toggle dla zawartości (pokazuje lub chowa)
+                const content = button.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                // Toggle dla klasy aktywnej (zmiana koloru przycisku)
+                button.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
