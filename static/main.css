@@ -36,7 +36,6 @@ body {
     -webkit-backdrop-filter: blur(10px); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     outline: none; 
-    margin-top: 300px;
     padding-left: 30px;
     font-family: 'Electrolize';
 }
